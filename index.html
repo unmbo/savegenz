@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentalHealth - Edukasi Kesehatan Mental</title>
+    <!-- Google Fonts untuk font modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* Navigasi */
+        nav {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4a6fa5;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .nav-menu a:hover {
+            color: #4a6fa5;
+        }
+
+        .btn-dashboard {
+            background: #4a6fa5;
+            color: white !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+        }
+
+        .btn-dashboard:hover {
+            background: #3a5a87;
+            color: white !important;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #4a6fa5 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card i {
+            font-size: 3rem;
+            color: #4a6fa5;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .info-card p {
+            color: #666;
+        }
+
+        /* Fitur Kesehatan Mental */
+        .features {
+            background: #f0f4f8;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .feature-item i {
+            font-size: 2rem;
+            color: #4a6fa5;
+            background: white;
+            padding: 1rem;
+            border-radius: 50%;
+        }
+
+        .feature-text h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 2px solid transparent;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(74, 111, 165, 0.2);
+            border-color: #4a6fa5;
+        }
+
+        .dashboard-card i {
+            font-size: 3.5rem;
+            color: #4a6fa5;
+            margin-bottom: 1.2rem;
+            background: #eef2f7;
+            padding: 1rem;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .dashboard-card:hover i {
+            background: #4a6fa5;
+            color: white;
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+        }
+           
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: #4a6fa5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .author-info h5 {
+            color: #2c3e50;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #4a6fa5 0%, #2c3e50 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #4a6fa5;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transition: 0.3s;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .features {
+                padding: 2rem 1rem;
+            }
+
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .testimonials {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigasi -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">MentalHealth</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#dashboard" class="btn-dashboard"><i class="fas fa-columns"></i> Beranda</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Peduli Mental, Peduli Masa Depan</h1>
+            <p>Temukan informasi, video edukasi, dan artikel terpercaya seputar kesehatan mental. Mari bersama-sama menghilangkan stigma dan mulai peduli pada kesehatan mental!</p>
+        </div>
+    </section>
+
+    <!-- Informasi Kesehatan Mental -->
+    <div class="container" id="informasi">
+        <div class="section-title">
+            <h2>Apa itu Kesehatan Mental?</h2>
+            <p>Memahami dasar-dasar kesehatan mental untuk hidup yang lebih baik</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fas fa-brain"></i>
+                <h3>Definisi</h3>
+                <p>Kesehatan mental adalah kondisi kesejahteraan seseorang yang menyadari kemampuannya sendiri, dapat mengatasi tekanan hidup normal, bekerja produktif, dan mampu berkontribusi pada komunitasnya.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Masalah Umum</h3>
+                <p>Stres, kecemasan, depresi, dan burnout adalah beberapa masalah kesehatan mental yang sering dialami masyarakat modern saat ini.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>Pentingnya Peduli</h3>
+                <p>Dengan peduli pada kesehatan mental, kita dapat meningkatkan kualitas hidup, hubungan sosial, dan produktivitas dalam bekerja.</p>
+            </div>
+        </div>
+
+        <!-- Fitur Kesehatan Mental -->
+        <div class="features">
+            <h3 style="text-align: center; color: #2c3e50; margin-bottom: 2rem;">5 Cara Menjaga Kesehatan Mental</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-heart"></i>
+                    <div class="feature-text">
+                        <h4>1. Bersyukur Setiap Hari</h4>
+                        <p>Luangkan waktu untuk menghargai hal-hal kecil dalam hidup. Menulis jurnal syukur dapat meningkatkan suasana hati.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-users"></i>
+                    <div class="feature-text">
+                        <h4>2. Jaga Koneksi Sosial</h4>
+                        <p>Terhubung dengan orang lain dapat mengurangi stres dan memberikan dukungan emosional.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bed"></i>
+                    <div class="feature-text">
+                        <h4>3. Tidur yang Cukup</h4>
+                        <p>Tidur 7-9 jam per malam membantu otak memproses emosi dan memulihkan energi.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-running"></i>
+                    <div class="feature-text">
+                        <h4>4. Olahraga Teratur</h4>
+                        <p>Aktivitas fisik melepaskan endorfin yang dapat mengurangi stres dan kecemasan.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-stop"></i>
+                    <div class="feature-text">
+                        <h4>5. Belajar Berkata Tidak</h4>
+                        <p>Menetapkan batasan yang sehat membantu mencegah burnout dan kelelahan mental.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Siap untuk Memulai Perjalanan?</h2>
+            <p>Jangan tunggu sampai masalah membesar. Mulai peduli pada kesehatan mental Anda hari ini!
+            Pilih salah satu dashboard untuk mendapatkan informasi lebih lanjut</p>
+
+        <div class="dashboard-grid">
+            <a href="dashboard-profil.html" class="dashboard-card">
+                <i class="fas fa-users"></i>
+                <h3>Profil</h3>
+                <p>Kenali tim konsultan dan pembuat platform edukasi ini.</p>
+            </a>
+            <a href="dashboard-video.html" class="dashboard-card">
+                <i class="fas fa-video"></i>
+                <h3>Video Edukasi</h3>
+                <p>Tonton video informatif seputar kesehatan mental.</p>
+            </a>
+            <a href="dashboard-artikel.html" class="dashboard-card">
+                <i class="fas fa-newspaper"></i>
+                <h3>Artikel</h3>
+                <p>Baca artikel singkat untuk menambah wawasan.</p>
+            </a>
+        </div>
+   
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 MentalHealth. Semua hak dilindungi. | Peduli mental, peduli masa depan.</p>
+    </footer>
+
+    <!-- JavaScript untuk hamburger menu -->
+    <script>
+        const navMenu = document.getElementById('nav-menu');
+        const hamburger = document.getElementById('hamburger');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Tutup menu ketika link diklik
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll untuk anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

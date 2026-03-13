@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Profil - Edukasi Mental Health</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* Navigasi Kembali ke Utama */
+        .back-nav {
+            background: #4a6fa5;
+            padding: 0.8rem 2rem;
+        }
+        .back-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s;
+        }
+        .back-nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Konten Utama */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p {
+            color: #7f8c8d;
+        }
+
+        /* Tab Menu */
+        .tab-menu {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 1rem;
+        }
+        .tab-link {
+            background: none;
+            border: none;
+            padding: 0.7rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .tab-link i {
+            font-size: 1.2rem;
+        }
+        .tab-link.active {
+            background: #4a6fa5;
+            color: white;
+        }
+        .tab-link:hover:not(.active) {
+            background: #eef2f7;
+        }
+
+        /* Konten Tab */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .tab-content.active-content {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Kartu Profil Konsultan (tetap seperti sebelumnya) */
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .profile-avatar i {
+            font-size: 8rem;
+            color: #4a6fa5;
+            background: #eef2f7;
+            padding: 1rem;
+            border-radius: 50%;
+        }
+        .profile-detail h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        .profile-detail .role {
+            color: #4a6fa5;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: #eef2f7;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+        }
+        .profile-detail p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        .profile-detail i {
+            color: #4a6fa5;
+            width: 25px;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        .info-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* Grid untuk 6 Profil Pembuat */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            border-bottom: 5px solid transparent;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(74, 111, 165, 0.15);
+            border-bottom-color: #4a6fa5;
+        }
+
+        .team-avatar {
+            margin-bottom: 1.5rem;
+        }
+
+        .team-avatar i {
+            font-size: 5rem;
+            color: #4a6fa5;
+            background: #eef2f7;
+            padding: 1rem;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .team-card:hover .team-avatar i {
+            background: #4a6fa5;
+            color: white;
+        }
+
+        .team-card h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .team-role {
+            color: #4a6fa5;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: #eef2f7;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .team-bio {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .team-social a {
+            color: #4a6fa5;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            width: 35px;
+            height: 35px;
+            background: #eef2f7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .team-social a:hover {
+            background: #4a6fa5;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .team-divider {
+            margin: 2rem 0 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .team-divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+
+        .team-divider span {
+            background: #f9f9f9;
+            padding: 0 1rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .info-list li {
+                justify-content: center;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigasi Kembali ke Dashboard Utama -->
+    <div class="back-nav">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Kembali ke Dashboard Utama</a>
+    </div>
+
+    <main>
+        <div class="page-header">
+            <h1>Dashboard Profil</h1>
+            <p>Kenali lebih dekat tim di balik layar dan konsultan kami</p>
+        </div>
+
+        <!-- Tab Menu -->
+        <div class="tab-menu">
+            <button class="tab-link active" id="tab-konsultan" onclick="openTab('konsultan')">
+                <i class="fas fa-user-md"></i> Profil Konsultan
+            </button>
+            <button class="tab-link" id="tab-pembuat" onclick="openTab('pembuat')">
+                <i class="fas fa-code"></i> Profil Pembuat 
+            </button>
+        </div>
+
+        <!-- Konten Tab Profil Konsultan -->
+        <div id="konsultan" class="tab-content active-content">
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="profile-detail">
+                    <h2>Dr. Amanda Wijaya, M.Psi., Psikolog</h2>
+                    <span class="role"><i class="fas fa-briefcase"></i> Konsultan Kesehatan Mental</span>
+                    <p>Dr. Amanda adalah seorang psikolog klinis dengan pengalaman lebih dari 10 tahun dalam menangani berbagai isu kesehatan mental seperti kecemasan, depresi, dan stres. Beliau juga aktif sebagai pembicara dan penulis artikel di berbagai platform kesehatan.</p>
+                    
+                    <ul class="info-list">
+                        <li><i class="fas fa-graduation-cap"></i> S3 Psikologi Klinis, Universitas Indonesia</li>
+                        <li><i class="fas fa-certificate"></i> Lisensi Psikolog Klinis (No. 12345/PP/2020)</li>
+                        <li><i class="fas fa-heart"></i> Spesialisasi: Terapi Kognitif-Perilaku (CBT) dan Mindfulness</li>
+                        <li><i class="fas fa-envelope"></i> amanda.wijaya@mentalhealth.id</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Konten Tab Profil Pembuat - 6 Kotak -->
+        <div id="pembuat" class="tab-content">
+            <div class="team-divider">
+                <span>🌟 TIM PENGEMBANG MENTALHEALTH 🌟</span>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Anggota 1: Project Lead & Developer -->
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <h3>Faisal Adi Pradana</h3>
+                    <div class="team-role"></div>
+                    <p class="team-bio">----</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Anggota 2: Content Writer -->
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-feather-alt"></i>
+                    </div>
+                    <h3>Fadilan</h3>
+                    <div class="team-role">-----</div>
+                    <p class="team-bio">-----</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-medium"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Anggota 3: UI/UX Designer -->
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Nur Suci Ramadani</h3>
+                    <div class="team-role">UI/UX Designer</div>
+                    <p class="team-bio">Desainer yang fokus pada pengalaman pengguna. Mendesain antarmuka yang ramah dan mudah digunakan untuk semua kalangan.</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Anggota 4: Research Associate -->
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>Nadya Arika</h3>
+                    <div class="team-role">----</div>
+                    <p class="team-bio">----</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fas fa-flask"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Anggota 5: Video Editor -->
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Nuristiana</h3>
+                    <div class="team-role">---</div>
+                    <p class="team-bio">------</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Anggota 6: Social Media Specialist -->
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3>Mutia Izzatul Janah</h3>
+                    <div class="team-role">----</div>
+                    <p class="team-bio">-----</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Misi Tim -->
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #eef2f7; border-radius: 15px;">
+                <i class="fas fa-quote-left" style="color: #4a6fa5; font-size: 2rem; opacity: 0.5; margin-bottom: 1rem;"></i>
+                <p style="font-size: 1.1rem; color: #2c3e50; font-style: italic; max-width: 700px; margin: 0 auto;">
+                    "Kami adalah sekelompok individu yang peduli terhadap isu kesehatan mental dan percaya bahwa teknologi dapat menjadi jembatan untuk menyebarkan informasi positif. Platform ini diluncurkan pada tahun 2024 dengan misi <strong>'Peduli mental, peduli masa depan'</strong>."
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function openTab(tabName) {
+            // Sembunyikan semua konten tab
+            var tabContents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active-content');
+            }
+
+            // Hapus kelas aktif dari semua tombol tab
+            var tabLinks = document.getElementsByClassName('tab-link');
+            for (var i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove('active');
+            }
+
+            // Tampilkan konten tab yang dipilih dan set tombolnya menjadi aktif
+            document.getElementById(tabName).classList.add('active-content');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
