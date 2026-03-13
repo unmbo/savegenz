@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Konsultasi - MentalHealth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigasi Kembali ke Utama */
+        .back-nav {
+            background: #4a6fa5;
+            padding: 0.8rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .back-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s;
+        }
+        .back-nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Container Utama */
+        .container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .header p {
+            color: #5a6b7a;
+            font-size: 1.1rem;
+        }
+        .header i {
+            color: #4a6fa5;
+            margin-right: 0.5rem;
+        }
+
+        /* Card Utama */
+        .consultation-card {
+            background: white;
+            border-radius: 30px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* Progress Step */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e0e0e0;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        .step {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #999;
+            position: relative;
+            z-index: 2;
+            border: 2px solid #e0e0e0;
+        }
+        .step.active {
+            color: #4a6fa5;
+            border-color: #4a6fa5;
+            background: #eef2f7;
+        }
+        .step i {
+            margin-right: 0.5rem;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+        .form-group label i {
+            color: #4a6fa5;
+            margin-right: 0.5rem;
+            width: 20px;
+        }
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 0.2rem;
+        }
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #4a6fa5;
+            background: white;
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.1);
+        }
+        .form-control:hover {
+            border-color: #b0c4de;
+        }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Radio Group untuk Pilihan Konsultan */
+        .consultant-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .consultant-option {
+            position: relative;
+        }
+        .consultant-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .consultant-option label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: #f8fafd;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+        .consultant-option input[type="radio"]:checked + label {
+            background: #eef2f7;
+            border-color: #4a6fa5;
+            color: #4a6fa5;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.2);
+        }
+        .consultant-option label i {
+            font-size: 1.5rem;
+            color: #4a6fa5;
+        }
+        .consultant-option label:hover {
+            background: #e8ecf3;
+            border-color: #b0c4de;
+        }
+        .consultant-badge {
+            background: #4a6fa5;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.5rem;
+        }
+
+        /* Info Tambahan */
+        .info-box {
+            background: #eef2f7;
+            border-radius: 15px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid #4a6fa5;
+        }
+        .info-box i {
+            color: #4a6fa5;
+            margin-right: 0.5rem;
+        }
+        .info-box p {
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
+
+        /* Tombol */
+        .btn {
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .btn:hover {
+            background: #3a5a87;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(74, 111, 165, 0.3);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Alert */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideIn 0.5s ease;
+        }
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #dc3545;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Panduan */
+        .guide-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .guide-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .guide-list {
+            list-style: none;
+        }
+        .guide-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #555;
+        }
+        .guide-list li i {
+            color: #4a6fa5;
+            width: 25px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: transparent;
+            color: #6c757d;
+            margin-top: 2rem;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .container {
+                margin: 1.5rem auto;
+                padding: 0 1rem;
+            }
+            .consultation-card {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .progress-steps {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
+            .progress-steps::before {
+                display: none;
+            }
+            .step {
+                width: 100%;
+                text-align: center;
+            }
+            .consultant-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigasi Kembali ke Dashboard Utama -->
+    <div class="back-nav">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Kembali ke Dashboard Utama</a>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-comments"></i> Dashboard Konsultasi</h1>
+            <p>Sampaikan keluhan Anda, tim konsultan kami siap membantu</p>
+        </div>
+
+        <!-- Form Konsultasi -->
+        <div class="consultation-card">
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step active"><i class="fas fa-pencil-alt"></i> Isi Data</div>
+                <div class="step"><i class="fas fa-check-circle"></i> Verifikasi</div>
+                <div class="step"><i class="fas fa-whatsapp"></i> Kirim ke WhatsApp</div>
+            </div>
+
+            <!-- Alert untuk notifikasi (awalnya disembunyikan) -->
+            <div id="alertMessage" class="alert" style="display: none;"></div>
+
+            <!-- Form -->
+            <form id="consultationForm">
+                <!-- Inisial Nama -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-user"></i> Inisial Nama <span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-control" id="nama" placeholder="Contoh: A. Pratama" required>
+                    <small style="color: #6c757d; display: block; margin-top: 0.3rem;">*Cukup tulis inisial untuk menjaga privasi</small>
+                </div>
+
+                <!-- Umur -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-calendar-alt"></i> Umur <span class="required">*</span>
+                    </label>
+                    <input type="number" class="form-control" id="umur" placeholder="Contoh: 25" min="1" max="120" required>
+                </div>
+
+                <!-- Alamat -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-map-marker-alt"></i> Alamat <span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-control" id="alamat" placeholder="Contoh: Jakarta" required>
+                    <small style="color: #6c757d; display: block; margin-top: 0.3rem;">*Cukup tulis kota/kabupaten saja</small>
+                </div>
+
+                <!-- Keluhan -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-comment-dots"></i> Keluhan <span class="required">*</span>
+                    </label>
+                    <textarea class="form-control" id="keluhan" placeholder="Tuliskan keluhan Anda dengan jelas..." required></textarea>
+                </div>
+
+                <!-- Pilihan Konsultan -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-user-md"></i> Pilih Konsultan <span class="required">*</span>
+                    </label>
+                    <div class="consultant-group">
+                        <div class="consultant-option">
+                            <input type="radio" name="konsultan" id="konsultan1" value="Dr. Amanda Wijaya (Psikolog Klinis)" checked>
+                            <label for="konsultan1">
+                                <i class="fas fa-female"></i>
+                                Dr. Amanda Wijaya
+                                <span class="consultant-badge">Psikolog</span>
+                            </label>
+                        </div>
+                        <div class="consultant-option">
+                            <input type="radio" name="konsultan" id="konsultan2" value="dr. Budi Santoso (Psikiater)">
+                            <label for="konsultan2">
+                                <i class="fas fa-male"></i>
+                                dr. Budi Santoso
+                                <span class="consultant-badge">Psikiater</span>
+                            </label>
+                        </div>
+                        <div class="consultant-option">
+                            <input type="radio" name="konsultan" id="konsultan3" value="Dra. Siti Nurhaliza (Konselor)">
+                            <label for="konsultan3">
+                                <i class="fas fa-user-tie"></i>
+                                Dra. Siti Nurhaliza
+                                <span class="consultant-badge">Konselor</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Box -->
+                <div class="info-box">
+                    <i class="fas fa-shield-alt"></i>
+                    <p><strong>Privasi Terjamin:</strong> Data Anda akan langsung dikirim ke WhatsApp konsultan dan tidak disimpan di server kami. Konsultan akan membalas melalui WhatsApp dalam 1x24 jam.</p>
+                </div>
+
+                <!-- Tombol Kirim -->
+                <button type="button" class="btn" onclick="kirimKeWhatsApp()">
+                    <i class="fab fa-whatsapp"></i>
+                    Kirim Keluhan ke WhatsApp Konsultan
+                </button>
+            </form>
+        </div>
+
+        <!-- Panduan Konsultasi -->
+        <div class="guide-card">
+            <h3 class="guide-title"><i class="fas fa-lightbulb"></i> Panduan Konsultasi</h3>
+            <ul class="guide-list">
+                <li><i class="fas fa-check-circle" style="color: #28a745;"></i> Isi semua kolom dengan lengkap agar konsultan memahami kondisi Anda</li>
+                <li><i class="fas fa-check-circle" style="color: #28a745;"></i> Keluhan akan langsung terkirim ke WhatsApp konsultan pilihan Anda</li>
+                <li><i class="fas fa-check-circle" style="color: #28a745;"></i> Konsultan akan merespon dalam waktu 1x24 jam via WhatsApp</li>
+                <li><i class="fas fa-check-circle" style="color: #28a745;"></i> Semua data bersifat rahasia dan hanya digunakan untuk keperluan konsultasi</li>
+                <li><i class="fas fa-check-circle" style="color: #28a745;"></i> Jika darurat, segera hubungi layanan darurat terdekat</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 MentalHealth. Layanan Konsultasi Mental Health.</p>
+    </footer>
+
+    <script>
+        // Nomor WhatsApp Konsultan (sesuai permintaan)
+        const NOMOR_KONSULTAN = '6285238439992'; // 085238439992 dalam format internasional
+        
+        function kirimKeWhatsApp() {
+            // Ambil nilai dari form
+            const nama = document.getElementById('nama').value.trim();
+            const umur = document.getElementById('umur').value.trim();
+            const alamat = document.getElementById('alamat').value.trim();
+            const keluhan = document.getElementById('keluhan').value.trim();
+            
+            // Ambil konsultan yang dipilih
+            const konsultanElements = document.getElementsByName('konsultan');
+            let konsultanTerpilih = '';
+            for (let i = 0; i < konsultanElements.length; i++) {
+                if (konsultanElements[i].checked) {
+                    konsultanTerpilih = konsultanElements[i].value;
+                    break;
+                }
+            }
+
+            // Validasi form
+            if (!nama || !umur || !alamat || !keluhan) {
+                tampilkanAlert('Semua kolom harus diisi!', 'error');
+                return;
+            }
+
+            if (umur < 1 || umur > 120) {
+                tampilkanAlert('Umur tidak valid!', 'error');
+                return;
+            }
+
+            if (keluhan.length < 10) {
+                tampilkanAlert('Keluhan terlalu pendek. Minimal 10 karakter.', 'error');
+                return;
+            }
+
+            // Format pesan untuk WhatsApp
+            const pesan = `*KONSULTASI MENTAL HEALTH*
+            
+*Data Diri:*
+• Inisial: ${nama}
+• Umur: ${umur} tahun
+• Alamat: ${alamat}
+
+*Konsultan Tujuan:*
+• ${konsultanTerpilih}
+
+*Keluhan:*
+${keluhan}
+
+---
+*Catatan:* Pesan ini dikirim otomatis dari Dashboard Konsultasi MentalHealth. Mohon dibalas dalam 1x24 jam. Terima kasih.`;
+
+            // Encode pesan untuk URL
+            const pesanEncoded = encodeURIComponent(pesan);
+
+            // Buat URL WhatsApp
+            const urlWhatsApp = `https://wa.me/${NOMOR_KONSULTAN}?text=${pesanEncoded}`;
+
+            // Tampilkan alert sukses
+            tampilkanAlert('Mengalihkan ke WhatsApp...', 'success');
+
+            // Redirect ke WhatsApp setelah 1 detik
+            setTimeout(() => {
+                window.open(urlWhatsApp, '_blank');
+                
+                // Reset form (opsional)
+                // document.getElementById('consultationForm').reset();
+            }, 1000);
+        }
+
+        function tampilkanAlert(pesan, tipe) {
+            const alertDiv = document.getElementById('alertMessage');
+            alertDiv.style.display = 'flex';
+            alertDiv.className = `alert alert-${tipe}`;
+            
+            if (tipe === 'success') {
+                alertDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${pesan}`;
+            } else {
+                alertDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${pesan}`;
+            }
+
+            // Auto hide alert setelah 3 detik
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Tambahkan validasi real-time untuk umur
+        document.getElementById('umur').addEventListener('input', function(e) {
+            if (this.value < 1) this.value = 1;
+            if (this.value > 120) this.value = 120;
+        });
+
+        // Prevent form submission jika user tekan enter
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            kirimKeWhatsApp();
+        });
+    </script>
+</body>
+</html>
