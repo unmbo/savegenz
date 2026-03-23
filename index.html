@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MentalHealth - Edukasi Kesehatan Mental</title>
-    <!-- Google Fonts untuk font modern -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome untuk ikon -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -43,10 +43,20 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
             font-size: 1.5rem;
             font-weight: 700;
             color: #4a6fa5;
-            text-decoration: none;
+        }
+        .logo-img {
+            height: 100px;
+            width: auto;
+            /* Jika logo memiliki background hitam, berikut CSS opsional untuk meminimalkan hitam */
+            background: transparent;
+            mix-blend-mode: multiply; /* bisa dicoba untuk mengurangi hitam, tapi hasil terbaik dengan PNG transparan */
         }
 
         .nav-menu {
@@ -275,8 +285,6 @@
             margin-bottom: 0.8rem;
             color: #2c3e50;
         }
-           
-
         .author-avatar {
             width: 50px;
             height: 50px;
@@ -299,41 +307,6 @@
             font-size: 0.9rem;
         }
 
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #4a6fa5 0%, #2c3e50 100%);
-            color: white;
-            text-align: center;
-            padding: 4rem 2rem;
-            border-radius: 20px;
-            margin: 3rem 0;
-        }
-
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .cta-section p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #4a6fa5;
-            padding: 1rem 2.5rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
-        }
 
         /* Footer */
         footer {
@@ -396,9 +369,12 @@
     <!-- Navigasi -->
     <nav>
         <div class="nav-container">
-            <a href="#" class="logo">MentalHealth</a>
+            <a href="#" class="logo">
+                <img src="images/logo.png" alt="MentalHealth Logo" class="logo-img">
+                <span>MentalHealth</span>
+            </a>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="#dashboard" class="btn-dashboard"><i class="fas fa-columns"></i> Beranda</a></li>
+                <li><a href="#home"><i class="fas fa-home"></i> Beranda</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
@@ -481,11 +457,11 @@
             </div>
         </div>
 
-<!-- CTA Section -->
-        <div class="cta-section">
-            <h2>Siap untuk Memulai Perjalanan?</h2>
-            <p>Jangan tunggu sampai masalah membesar. Mulai peduli pada kesehatan mental Anda hari ini!
-            Pilih salah satu dashboard untuk mendapatkan informasi lebih lanjut</p>
+        <!-- Dashboard Cards Section -->
+        <div class="section-title" id="dashboard">
+            <h2>Mulai Eksplorasi</h2>
+            <p>Pilih salah satu dashboard untuk mendapatkan informasi lebih lanjut</p>
+        </div>
 
         <div class="dashboard-grid">
             <a href="dashboard-profil.html" class="dashboard-card">
@@ -504,18 +480,17 @@
                 <p>Baca artikel singkat untuk menambah wawasan.</p>
             </a>
             <a href="dashboard-konsultasi.html" class="dashboard-card">
-                 <i class="fas fa-comments"></i>
+                <i class="fas fa-comments"></i>
                 <h3>Konsultasi</h3>
-                 <p>Sampaikan keluhan Anda langsung ke konsultan via WhatsApp.</p>
+                <p>Sampaikan keluhan Anda langsung ke konsultan via WhatsApp.</p>
             </a>
-            <!-- Tambahkan di dalam div class="dashboard-grid" -->
-<a href="dashboard-ulasan.html" class="dashboard-card">
-    <i class="fas fa-star"></i>
-    <h3>Ulasan</h3>
-    <p>Bagikan pengalaman Anda dan lihat ulasan dari pengunjung lain.</p>
-</a>
+            <a href="dashboard-ulasan.html" class="dashboard-card">
+                <i class="fas fa-star"></i>
+                <h3>Ulasan</h3>
+                <p>Bagikan pengalaman Anda dan lihat ulasan dari pengunjung lain.</p>
+            </a>
         </div>
-   
+                      
 
     <!-- Footer -->
     <footer>
@@ -553,5 +528,4 @@
         });
     </script>
 </body>
-
 </html>
