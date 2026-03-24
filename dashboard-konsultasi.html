@@ -683,42 +683,48 @@ Total Skor: ${window.screeningScore} / 80
 Interpretasi: ${document.getElementById('interpretasi').innerText}
 
 *Catatan:* Hasil ini adalah skrining awal. Silakan konsultasikan lebih lanjut dengan profesional.`;
-            const NOMOR_KONSULTAN = {
-            'Afrina Maulida, M.Si. (Konsultan)': '082338038199',  
-            'Lies imma J. M.Si (Konsultan)': '081217217601',        
+           // ========== KONFIGURASI NOMOR WHATSAPP PER KONSULTAN ==========
+const NOMOR_KONSULTAN = {
+    'Afrina Maulida, M.Si. (Konsultan)': '6282338038199',
+    'Lies imma J. M.Si (Konsultan)': '6281217217601',
+    // Tambahkan konsultan ketiga jika ada
+};
         }
-            const url = `https://wa.me/${nomorKonsultan}?text=${encodeURIComponent(pesan)}`;
-            window.open(url, '_blank');
-        }
+function kirimKeWhatsApp() {
+    const nama = document.getElementById('nama').value.trim();
+    const umur = document.getElementById('umur').value.trim();
+    const alamat = document.getElementById('alamat').value.trim();
+    const keluhan = document.getElementById('keluhan').value.trim();
 
-        // ========== KONSULTASI WHATSAPP (sama seperti sebelumnya) ==========
-        // Nomor WhatsApp per Konsultan
-        const NOMOR_KONSULTAN = {
-            'Afrina Maulida, M.Si. (Konsultan)': '082338038199',  
-            'Lies imma J. M.Si (Konsultan)': '081217217601',        
+    // Ambil konsultan yang dipilih
+    const konsultanElements = document.getElementsByName('konsultan');
+    let konsultanTerpilih = '';
+    for (let i = 0; i < konsultanElements.length; i++) {
+        if (konsultanElements[i].checked) {
+            konsultanTerpilih = konsultanElements[i].value;
+            break;
         }
-        function kirimKeWhatsApp() {
-            const nama = document.getElementById('nama').value.trim();
-            const umur = document.getElementById('umur').value.trim();
-            const alamat = document.getElementById('alamat').value.trim();
-            const keluhan = document.getElementById('keluhan').value.trim();
-            const konsultanElements = document.getElementsByName('konsultan');
-            let konsultanTerpilih = '';
-            for (let i = 0; i < konsultanElements.length; i++) {
-                if (konsultanElements[i].checked) {
-                    konsultanTerpilih = konsultanElements[i].value;
-                    break;
-                }
-            }
-            if (!nama || !umur || !alamat || !keluhan) {
-                tampilkanAlert('Semua kolom harus diisi!', 'error');
-                return;
-            }
-            if (keluhan.length < 10) {
-                tampilkanAlert('Keluhan terlalu pendek. Minimal 10 karakter.', 'error');
-                return;
-            }
-            let pesan = `*KONSULTASI MENTAL HEALTH*
+    }
+
+    // Validasi
+    if (!nama || !umur || !alamat || !keluhan) {
+        tampilkanAlert('Semua kolom harus diisi!', 'error');
+        return;
+    }
+    if (keluhan.length < 10) {
+        tampilkanAlert('Keluhan terlalu pendek. Minimal 10 karakter.', 'error');
+        return;
+    }
+
+    // Ambil nomor berdasarkan konsultan terpilih
+    const nomorKonsultan = NOMOR_KONSULTAN[konsultanTerpilih];
+    if (!nomorKonsultan) {
+        tampilkanAlert('Nomor konsultan tidak ditemukan!', 'error');
+        return;
+    }
+
+    // Format pesan
+    let pesan = `*KONSULTASI MENTAL HEALTH*
 Data Diri:
 • Inisial: ${nama}
 • Umur: ${umur} tahun
@@ -726,17 +732,21 @@ Data Diri:
 Konsultan Tujuan: ${konsultanTerpilih}
 Keluhan:
 ${keluhan}`;
-            // Jika ada hasil screening, bisa ditambahkan
-            if (typeof window.screeningScore !== 'undefined') {
-                pesan += `\n\n*Hasil Screening:*\nSkor: ${window.screeningScore} / 80\nInterpretasi: ${document.getElementById('interpretasi').innerText}`;
-            }
-            pesan += `\n---\n*Catatan:* Pesan ini dikirim otomatis dari Dashboard Konsultasi MentalHealth. Mohon dibalas dalam 1x24 jam.`;
-            const url = `https://wa.me/${NOMOR_KONSULTAN}?text=${encodeURIComponent(pesan)}`;
-            tampilkanAlert('Mengalihkan ke WhatsApp...', 'success');
-            setTimeout(() => {
-                window.open(url, '_blank');
-            }, 1000);
-        }
+
+    // Tambahkan hasil screening jika ada
+    if (typeof window.screeningScore !== 'undefined') {
+        pesan += `\n\n*Hasil Screening:*\nSkor: ${window.screeningScore} / 80\nInterpretasi: ${document.getElementById('interpretasi').innerText}`;
+    }
+
+    pesan += `\n---\n*Catatan:* Pesan ini dikirim otomatis dari Dashboard Konsultasi MentalHealth. Mohon dibalas dalam 1x24 jam.`;
+
+    // Buka WhatsApp
+    const url = `https://wa.me/${nomorKonsultan}?text=${encodeURIComponent(pesan)}`;
+    tampilkanAlert('Mengalihkan ke WhatsApp...', 'success');
+    setTimeout(() => {
+        window.open(url, '_blank');
+    }, 1000);
+}
 
         function tampilkanAlert(pesan, tipe) {
             const alertDiv = document.getElementById('alertMessage');
