@@ -683,13 +683,20 @@ Total Skor: ${window.screeningScore} / 80
 Interpretasi: ${document.getElementById('interpretasi').innerText}
 
 *Catatan:* Hasil ini adalah skrining awal. Silakan konsultasikan lebih lanjut dengan profesional.`;
-            const nomorKonsultan = '6285238439992'; // Ganti dengan nomor konsultan Anda
+            const NOMOR_KONSULTAN = {
+            'Afrina Maulida, M.Si. (Konsultan)': '6282338038199',  
+            'Lies imma J. M.Si (Konsultan)': '6281217217601',        
+        }
             const url = `https://wa.me/${nomorKonsultan}?text=${encodeURIComponent(pesan)}`;
             window.open(url, '_blank');
         }
 
         // ========== KONSULTASI WHATSAPP (sama seperti sebelumnya) ==========
-        const NOMOR_KONSULTAN = '6285238439992';
+        // Nomor WhatsApp per Konsultan
+        const NOMOR_KONSULTAN = {
+            'Afrina Maulida, M.Si. (Konsultan)': '6282338038199',  
+            'Lies imma J. M.Si (Konsultan)': '6281217217601',        
+        }
         function kirimKeWhatsApp() {
             const nama = document.getElementById('nama').value.trim();
             const umur = document.getElementById('umur').value.trim();
