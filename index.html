@@ -40,6 +40,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
+            position: relative;
         }
 
         .logo {
@@ -52,49 +53,65 @@
             color: #4a6fa5;
         }
         .logo-img {
-            height: 100px;
+            height: 40px;
             width: auto;
-            /* Jika logo memiliki background hitam, berikut CSS opsional untuk meminimalkan hitam */
             background: transparent;
-            mix-blend-mode: multiply; /* bisa dicoba untuk mengurangi hitam, tapi hasil terbaik dengan PNG transparan */
+            mix-blend-mode: multiply;
         }
 
-        .nav-menu {
+        /* Hamburger icon */
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: #4a6fa5;
+            transition: 0.3s;
+            background: none;
+            border: none;
+        }
+        .hamburger:hover {
+            color: #2c3e50;
+        }
+
+        /* Dropdown menu (muncul saat hamburger diklik) */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            min-width: 220px;
+            padding: 0.8rem 0;
+            display: none;
+            z-index: 200;
+            animation: fadeIn 0.2s ease;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+        .dropdown-menu a {
             display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-menu a {
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
             text-decoration: none;
             color: #333;
             font-weight: 500;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
+            transition: background 0.2s;
         }
-
-        .nav-menu a:hover {
+        .dropdown-menu a:hover {
+            background: #eef2f7;
+            color: #4a6fa5;
+        }
+        .dropdown-menu i {
+            width: 1.5rem;
             color: #4a6fa5;
         }
 
-        .btn-dashboard {
-            background: #4a6fa5;
-            color: white !important;
-            padding: 0.5rem 1.2rem;
-            border-radius: 25px;
-        }
-
-        .btn-dashboard:hover {
-            background: #3a5a87;
-            color: white !important;
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Hero Section */
@@ -285,6 +302,47 @@
             margin-bottom: 0.8rem;
             color: #2c3e50;
         }
+
+        /* Testimonials */
+        .testimonials {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: #f8fafd;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .testimonial-card i.fa-quote-left {
+            color: #4a6fa5;
+            opacity: 0.3;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .author-avatar {
             width: 50px;
             height: 50px;
@@ -307,7 +365,6 @@
             font-size: 0.9rem;
         }
 
-
         /* Footer */
         footer {
             background: #2c3e50;
@@ -317,50 +374,27 @@
             margin-top: 3rem;
         }
 
-        /* Responsif */
         @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px;
-                flex-direction: column;
-                background-color: white;
-                width: 100%;
-                text-align: center;
-                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-                padding: 2rem 0;
-                gap: 1.5rem;
-                transition: 0.3s;
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
             .hero h1 {
                 font-size: 2rem;
             }
-
             .hero-stats {
                 flex-direction: column;
                 gap: 1.5rem;
             }
-
             .features {
                 padding: 2rem 1rem;
             }
-
             .feature-item {
                 flex-direction: column;
                 text-align: center;
             }
-
             .testimonials {
                 padding: 2rem 1rem;
+            }
+            .dropdown-menu {
+                right: 1rem;
+                left: auto;
             }
         }
     </style>
@@ -373,11 +407,16 @@
                 <img src="images/logo.png" alt="MentalHealth Logo" class="logo-img">
                 <span>MentalHealth</span>
             </a>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home"><i class="fas fa-home"></i> Beranda</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburgerBtn">
                 <i class="fas fa-bars"></i>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#home"><i class="fas fa-home"></i> Beranda</a>
+                <a href="dashboard-profil.html"><i class="fas fa-users"></i> Profil</a>
+                <a href="dashboard-video.html"><i class="fas fa-video"></i> Video</a>
+                <a href="dashboard-artikel.html"><i class="fas fa-newspaper"></i> Artikel</a>
+                <a href="dashboard-konsultasi.html"><i class="fas fa-comments"></i> Konsultasi</a>
+                <a href="dashboard-ulasan.html"><i class="fas fa-star"></i> Ulasan</a>
             </div>
         </div>
     </nav>
@@ -457,72 +496,41 @@
             </div>
         </div>
 
-        <!-- Dashboard Cards Section -->
-        <div class="section-title" id="dashboard">
-            <h2>Mulai Eksplorasi</h2>
-            <p>Pilih salah satu dashboard untuk mendapatkan informasi lebih lanjut</p>
-        </div>
-
-        <div class="dashboard-grid">
-            <a href="dashboard-profil.html" class="dashboard-card">
-                <i class="fas fa-users"></i>
-                <h3>Profil</h3>
-                <p>Kenali tim konsultan dan pembuat platform edukasi ini.</p>
-            </a>
-            <a href="dashboard-video.html" class="dashboard-card">
-                <i class="fas fa-video"></i>
-                <h3>Video Edukasi</h3>
-                <p>Tonton video informatif seputar kesehatan mental.</p>
-            </a>
-            <a href="dashboard-artikel.html" class="dashboard-card">
-                <i class="fas fa-newspaper"></i>
-                <h3>Artikel</h3>
-                <p>Baca artikel singkat untuk menambah wawasan.</p>
-            </a>
-            <a href="dashboard-konsultasi.html" class="dashboard-card">
-                <i class="fas fa-comments"></i>
-                <h3>Konsultasi</h3>
-                <p>Sampaikan keluhan Anda langsung ke konsultan via WhatsApp.</p>
-            </a>
-            <a href="dashboard-ulasan.html" class="dashboard-card">
-                <i class="fas fa-star"></i>
-                <h3>Ulasan</h3>
-                <p>Bagikan pengalaman Anda dan lihat ulasan dari pengunjung lain.</p>
-            </a>
-        </div>
-                      
-
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 MentalHealth. Semua hak dilindungi. | Peduli mental, peduli masa depan.</p>
     </footer>
 
-    <!-- JavaScript untuk hamburger menu -->
     <script>
-        const navMenu = document.getElementById('nav-menu');
-        const hamburger = document.getElementById('hamburger');
+        // Toggle dropdown saat hamburger diklik
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const dropdown = document.getElementById('dropdownMenu');
 
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+        hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('show');
         });
 
-        // Tutup menu ketika link diklik
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
+        // Tutup dropdown jika klik di luar
+        document.addEventListener('click', (e) => {
+            if (!hamburgerBtn.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
         });
 
-        // Smooth scroll untuk anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+        // Smooth scroll untuk tautan internal (Beranda, Informasi)
+        document.querySelectorAll('.dropdown-menu a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
                 if (target) {
+                    e.preventDefault();
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    dropdown.classList.remove('show');
                 }
             });
         });
