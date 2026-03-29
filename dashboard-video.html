@@ -14,10 +14,14 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f9f9f9;
+            color: #333;
         }
+
+        /* Navigasi Kembali */
         .back-nav {
             background: #4a6fa5;
             padding: 0.8rem 2rem;
@@ -29,16 +33,18 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: opacity 0.3s;
         }
         .back-nav a:hover {
             opacity: 0.8;
         }
+
+        /* Kontainer Utama */
         main {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
+
         .page-header {
             text-align: center;
             margin-bottom: 2rem;
@@ -50,31 +56,38 @@
         }
         .page-header p {
             color: #7f8c8d;
+            font-size: 1.1rem;
         }
 
         /* Video Grid */
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
+
         .video-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+
         .video-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
         }
+
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
             height: 0;
             overflow: hidden;
+            background: #000;
         }
+
         .video-wrapper iframe {
             position: absolute;
             top: 0;
@@ -83,67 +96,204 @@
             height: 100%;
             border: none;
         }
+
         .video-info {
-            padding: 1.5rem;
+            padding: 1.2rem;
         }
+
         .video-info h3 {
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
             color: #2c3e50;
+            line-height: 1.4;
         }
+
         .video-info p {
             color: #7f8c8d;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
         }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: #95a5a6;
+        }
+
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 2rem;
             background: #2c3e50;
             color: white;
+            text-align: center;
+            padding: 2rem;
             margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            main {
+                padding: 0 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="back-nav">
-        <a href="index.html"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Kembali ke Dashboard Utama</a>
     </div>
+
     <main>
         <div class="page-header">
-            <h1>Video Edukasi</h1>
-            <p>Tonton video-video informatif seputar kesehatan mental</p>
+            <h1><i class="fas fa-video"></i> Video Edukasi</h1>
+            <p>Tonton video informatif seputar kesehatan mental dari berbagai sumber terpercaya</p>
         </div>
+
         <div class="video-grid">
+            <!-- Video 1: Apa itu Depresi? -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/oxx564h6U6M" title="Apa itu Kesehatan Mental?" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/wr2IqS8bsS4" title="Apa itu Depresi?" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
-                    <h3>Apa itu Kesehatan Mental?</h3>
-                    <p>Penjelasan dasar tentang kesehatan mental dan pentingnya menjaga keseimbangan jiwa.</p>
+                    <h3>Apa itu Depresi?</h3>
+                    <p>Penjelasan tentang depresi, gejala, dan pentingnya mencari bantuan profesional.</p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-calendar-alt"></i> 2019</span>
+                        <span><i class="fas fa-eye"></i> 1,9M views</span>
+                    </div>
                 </div>
             </div>
+
+            <!-- Video 2: Kesehatan Mental - Belajar Psikologi -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/NCgBky4Z4yU" title="Cara Mengatasi Stres" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/_50igeHW7vw" title="Kesehatan Mental - Belajar Psikologi" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Kesehatan Mental - Belajar Psikologi</h3>
+                    <p>Pengantar dasar psikologi untuk memahami kesehatan mental.</p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-calendar-alt"></i> 2022</span>
+                        <span><i class="fas fa-eye"></i> 55k views</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 3: Kesehatan Mental Remaja -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/D74V6dK62po" title="Kesehatan Mental Remaja" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Kesehatan Mental Remaja</h3>
+                    <p>Mengenal isu kesehatan mental yang sering dialami remaja dan cara mengatasinya.</p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-calendar-alt"></i> 2025</span>
+                        <span><i class="fas fa-eye"></i> 1,3k views</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 4: Gangguan Kesehatan Mental Ancam Generasi Muda -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/o4W5RTiH-HU" title="Gangguan Kesehatan Mental Ancam Generasi Muda" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Gangguan Kesehatan Mental Ancam Generasi Muda</h3>
+                    <p>Liputan tentang meningkatnya gangguan mental di kalangan anak muda.</p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-calendar-alt"></i> 2022</span>
+                        <span><i class="fas fa-eye"></i> 13,5k views</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 5: Cara Mengatasi Stres -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/rDYFMwQhFAU" title="Cara Mengatasi Stres" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
                     <h3>Cara Mengatasi Stres</h3>
                     <p>Teknik sederhana untuk mengelola stres dalam kehidupan sehari-hari.</p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-calendar-alt"></i> -</span>
+                        <span><i class="fas fa-eye"></i> -</span>
+                    </div>
                 </div>
             </div>
+
+            <!-- Video 6: Self-Care untuk Pemula -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/3QIfkeA6HBY" title="Self-Care untuk Pemula" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/5Y76XIgwVyI" title="Self-Care untuk Pemula" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
                     <h3>Self-Care untuk Pemula</h3>
                     <p>Langkah awal mempraktikkan self-care untuk menjaga kesehatan mental.</p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-calendar-alt"></i> -</span>
+                        <span><i class="fas fa-eye"></i> -</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 7: Mental Health Awareness -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/MKJppZ18FYU" title="Mental Health Awareness" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Mental Health Awareness</h3>
+                    <p>Pentingnya kesadaran akan kesehatan mental dan menghilangkan stigma.</p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-calendar-alt"></i> -</span>
+                        <span><i class="fas fa-eye"></i> -</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 8: Kesehatan Mental di Tempat Kerja -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/M5vu9vs0olc" title="Kesehatan Mental di Tempat Kerja" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Kesehatan Mental di Tempat Kerja</h3>
+                    <p>Tips menjaga kesehatan mental saat bekerja dan menghadapi tekanan pekerjaan.</p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-calendar-alt"></i> -</span>
+                        <span><i class="fas fa-eye"></i> -</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 9: Mengatasi Kecemasan -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/4yF3q1QduXY" title="Mengatasi Kecemasan" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Mengatasi Kecemasan</h3>
+                    <p>Cara praktis menghadapi rasa cemas yang berlebihan.</p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-calendar-alt"></i> -</span>
+                        <span><i class="fas fa-eye"></i> -</span>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+
     <footer>
-        <p>&copy; 2024 MentalHealth. Dashboard Video Edukasi.</p>
+        <p>&copy; 2024 MentalHealth. Semua hak dilindungi. | Peduli mental, peduli masa depan.</p>
     </footer>
 </body>
 </html>
