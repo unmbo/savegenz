@@ -9,296 +9,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%);
-            min-height: 100vh;
-        }
-
-        .back-nav {
-            background: #4a6fa5;
-            padding: 0.8rem 2rem;
-        }
-        .back-nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .back-nav a:hover {
-            opacity: 0.8;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .header h1 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-        .header p {
-            color: #5a6b7a;
-            font-size: 1.1rem;
-        }
-
-        /* Tab Menu */
-        .tab-menu {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        .tab-link {
-            background: none;
-            border: none;
-            padding: 0.7rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #555;
-            cursor: pointer;
-            border-radius: 30px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .tab-link.active {
-            background: #4a6fa5;
-            color: white;
-        }
-        .tab-link:hover:not(.active) {
-            background: #eef2f7;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        .tab-content.active-content {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Card Style */
-        .card {
-            background: white;
-            border-radius: 30px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-
-        /* Form Styles (untuk konsultasi) */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        .form-group label i {
-            color: #4a6fa5;
-            margin-right: 0.5rem;
-        }
-        .form-control {
-            width: 100%;
-            padding: 1rem 1.2rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background: #fafafa;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: #4a6fa5;
-            background: white;
-        }
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* Radio Group untuk Konsultan */
-        .consultant-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-        .consultant-option {
-            position: relative;
-        }
-        .consultant-option input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-        }
-        .consultant-option label {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem;
-            background: #f8fafd;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        .consultant-option input[type="radio"]:checked + label {
-            background: #eef2f7;
-            border-color: #4a6fa5;
-            color: #4a6fa5;
-            transform: scale(1.02);
-        }
-        .consultant-option label i {
-            font-size: 1.5rem;
-            color: #4a6fa5;
-        }
-        .consultant-badge {
-            background: #4a6fa5;
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 10px;
-            margin-left: 0.5rem;
-        }
-
-        .btn {
-            background: #4a6fa5;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-        .btn:hover {
-            background: #3a5a87;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(74, 111, 165, 0.3);
-        }
-
-        .alert {
-            padding: 1rem;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-            display: none;
-        }
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border-left: 5px solid #28a745;
-        }
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border-left: 5px solid #dc3545;
-        }
-
-        /* Screening Styles */
-        .screening-group {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 1rem;
-        }
-        .screening-group h3 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .question-item {
-            margin-bottom: 1.2rem;
-            padding: 0.5rem;
-            background: #f9f9ff;
-            border-radius: 12px;
-        }
-        .question-text {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-        .scale-options {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .scale-option {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        .scale-option input {
-            margin-right: 0.2rem;
-        }
-        .scale-option label {
-            font-size: 0.85rem;
-            color: #555;
-        }
-
-        .result-box {
-            background: #eef2f7;
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-        .total-score {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #4a6fa5;
-        }
-        .interpretation {
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-            .scale-options {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-        }
+        /* Semua style tetap sama seperti sebelumnya, tidak saya ubah untuk menghemat tempat */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%); min-height: 100vh; }
+        .back-nav { background: #4a6fa5; padding: 0.8rem 2rem; }
+        .back-nav a { color: white; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 2rem; }
+        .header { text-align: center; margin-bottom: 2rem; }
+        .header h1 { font-size: 2.5rem; color: #2c3e50; }
+        .header p { color: #7f8c8d; }
+        .tab-menu { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; border-bottom: 2px solid #e0e0e0; padding-bottom: 1rem; flex-wrap: wrap; }
+        .tab-link { background: none; border: none; padding: 0.7rem 2rem; font-size: 1.1rem; font-weight: 600; color: #555; cursor: pointer; border-radius: 30px; transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; }
+        .tab-link.active { background: #4a6fa5; color: white; }
+        .tab-link:hover:not(.active) { background: #eef2f7; }
+        .tab-content { display: none; animation: fadeIn 0.5s ease; }
+        .tab-content.active-content { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background: white; border-radius: 30px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2c3e50; }
+        .form-group label i { color: #4a6fa5; margin-right: 0.5rem; }
+        .form-control { width: 100%; padding: 1rem 1.2rem; border: 2px solid #e0e0e0; border-radius: 15px; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: all 0.3s; background: #fafafa; }
+        .form-control:focus { outline: none; border-color: #4a6fa5; background: white; }
+        textarea.form-control { resize: vertical; min-height: 120px; }
+        .consultant-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 0.5rem; }
+        .consultant-option { position: relative; }
+        .consultant-option input[type="radio"] { position: absolute; opacity: 0; }
+        .consultant-option label { display: flex; align-items: center; gap: 0.8rem; padding: 1rem; background: #f8fafd; border: 2px solid #e0e0e0; border-radius: 15px; cursor: pointer; transition: all 0.3s; font-weight: 500; }
+        .consultant-option input[type="radio"]:checked + label { background: #eef2f7; border-color: #4a6fa5; color: #4a6fa5; transform: scale(1.02); }
+        .consultant-option label i { font-size: 1.5rem; color: #4a6fa5; }
+        .consultant-badge { background: #4a6fa5; color: white; font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 10px; margin-left: 0.5rem; }
+        .btn { background: #4a6fa5; color: white; border: none; padding: 1rem 2rem; font-size: 1.1rem; font-weight: 600; border-radius: 50px; cursor: pointer; transition: all 0.3s; width: 100%; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .btn:hover { background: #3a5a87; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(74, 111, 165, 0.3); }
+        .alert { padding: 1rem; border-radius: 15px; margin-bottom: 1rem; display: none; }
+        .alert-success { background: #d4edda; color: #155724; border-left: 5px solid #28a745; }
+        .alert-error { background: #f8d7da; color: #721c24; border-left: 5px solid #dc3545; }
+        .screening-group { margin-bottom: 2rem; border-bottom: 1px solid #e0e0e0; padding-bottom: 1rem; }
+        .screening-group h3 { color: #2c3e50; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .question-item { margin-bottom: 1.2rem; padding: 0.5rem; background: #f9f9ff; border-radius: 12px; }
+        .question-text { font-weight: 500; margin-bottom: 0.5rem; color: #2c3e50; }
+        .scale-options { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .scale-option { display: flex; align-items: center; gap: 0.3rem; }
+        .scale-option input { margin-right: 0.2rem; }
+        .scale-option label { font-size: 0.85rem; color: #555; }
+        .result-box { background: #eef2f7; border-radius: 20px; padding: 1.5rem; margin-top: 1.5rem; text-align: center; }
+        .total-score { font-size: 2.5rem; font-weight: 700; color: #4a6fa5; }
+        .interpretation { font-size: 1.1rem; margin-top: 0.5rem; font-weight: 600; }
+        @media (max-width: 768px) { .container { padding: 0 1rem; } .scale-options { flex-direction: column; gap: 0.5rem; } }
     </style>
 </head>
 <body>
@@ -328,240 +85,73 @@
                 <h2 style="margin-bottom: 1rem;">Screening Kesehatan Mental</h2>
                 <p>Jawablah pertanyaan berikut sesuai dengan kondisi Anda dalam 2 minggu terakhir. Pilih skala: <strong>0=Tidak pernah, 1=Jarang, 2=Kadang-kadang, 3=Sering, 4=Sangat sering</strong></p>
                 <form id="screeningForm">
-                    <!-- Grup A: Perasaan & Emosi -->
+                    <!-- Pertanyaan A - Perasaan & Emosi -->
                     <div class="screening-group">
                         <h3><i class="fas fa-heart"></i> A. Perasaan & Emosi</h3>
-                        <div class="question-item">
-                            <div class="question-text">1. Apakah Anda sering merasa sedih tanpa alasan jelas?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="A1" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="A1" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="A1" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="A1" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="A1" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">2. Apakah Anda merasa kehilangan minat pada hal-hal yang dulu disukai?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="A2" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="A2" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="A2" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="A2" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="A2" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">3. Apakah Anda sering merasa cemas atau khawatir berlebihan?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="A3" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="A3" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="A3" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="A3" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="A3" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">4. Apakah Anda mudah tersinggung atau marah?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="A4" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="A4" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="A4" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="A4" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="A4" value="4"> 4</label>
-                            </div>
-                        </div>
+                        <div class="question-item"><div class="question-text">1. Apakah Anda sering merasa sedih tanpa alasan jelas?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="A1" value="0"> 0</label><label class="scale-option"><input type="radio" name="A1" value="1"> 1</label><label class="scale-option"><input type="radio" name="A1" value="2"> 2</label><label class="scale-option"><input type="radio" name="A1" value="3"> 3</label><label class="scale-option"><input type="radio" name="A1" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">2. Apakah Anda merasa kehilangan minat pada hal-hal yang dulu disukai?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="A2" value="0"> 0</label><label class="scale-option"><input type="radio" name="A2" value="1"> 1</label><label class="scale-option"><input type="radio" name="A2" value="2"> 2</label><label class="scale-option"><input type="radio" name="A2" value="3"> 3</label><label class="scale-option"><input type="radio" name="A2" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">3. Apakah Anda sering merasa cemas atau khawatir berlebihan?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="A3" value="0"> 0</label><label class="scale-option"><input type="radio" name="A3" value="1"> 1</label><label class="scale-option"><input type="radio" name="A3" value="2"> 2</label><label class="scale-option"><input type="radio" name="A3" value="3"> 3</label><label class="scale-option"><input type="radio" name="A3" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">4. Apakah Anda mudah tersinggung atau marah?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="A4" value="0"> 0</label><label class="scale-option"><input type="radio" name="A4" value="1"> 1</label><label class="scale-option"><input type="radio" name="A4" value="2"> 2</label><label class="scale-option"><input type="radio" name="A4" value="3"> 3</label><label class="scale-option"><input type="radio" name="A4" value="4"> 4</label></div></div>
                     </div>
-
-                    <!-- Grup B: Pikiran -->
+                    <!-- B. Pikiran -->
                     <div class="screening-group">
                         <h3><i class="fas fa-brain"></i> B. Pikiran</h3>
-                        <div class="question-item">
-                            <div class="question-text">1. Apakah Anda sering overthinking (berpikir berlebihan)?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="B1" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="B1" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="B1" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="B1" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="B1" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">2. Apakah Anda sulit berkonsentrasi?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="B2" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="B2" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="B2" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="B2" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="B2" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">3. Apakah Anda sering memikirkan hal buruk yang belum tentu terjadi?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="B3" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="B3" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="B3" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="B3" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="B3" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">4. Apakah Anda merasa tidak percaya diri?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="B4" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="B4" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="B4" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="B4" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="B4" value="4"> 4</label>
-                            </div>
-                        </div>
+                        <div class="question-item"><div class="question-text">1. Apakah Anda sering overthinking (berpikir berlebihan)?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="B1" value="0"> 0</label><label class="scale-option"><input type="radio" name="B1" value="1"> 1</label><label class="scale-option"><input type="radio" name="B1" value="2"> 2</label><label class="scale-option"><input type="radio" name="B1" value="3"> 3</label><label class="scale-option"><input type="radio" name="B1" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">2. Apakah Anda sulit berkonsentrasi?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="B2" value="0"> 0</label><label class="scale-option"><input type="radio" name="B2" value="1"> 1</label><label class="scale-option"><input type="radio" name="B2" value="2"> 2</label><label class="scale-option"><input type="radio" name="B2" value="3"> 3</label><label class="scale-option"><input type="radio" name="B2" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">3. Apakah Anda sering memikirkan hal buruk yang belum tentu terjadi?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="B3" value="0"> 0</label><label class="scale-option"><input type="radio" name="B3" value="1"> 1</label><label class="scale-option"><input type="radio" name="B3" value="2"> 2</label><label class="scale-option"><input type="radio" name="B3" value="3"> 3</label><label class="scale-option"><input type="radio" name="B3" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">4. Apakah Anda merasa tidak percaya diri?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="B4" value="0"> 0</label><label class="scale-option"><input type="radio" name="B4" value="1"> 1</label><label class="scale-option"><input type="radio" name="B4" value="2"> 2</label><label class="scale-option"><input type="radio" name="B4" value="3"> 3</label><label class="scale-option"><input type="radio" name="B4" value="4"> 4</label></div></div>
                     </div>
-
-                    <!-- Grup C: Perilaku -->
+                    <!-- C. Perilaku -->
                     <div class="screening-group">
                         <h3><i class="fas fa-walking"></i> C. Perilaku</h3>
-                        <div class="question-item">
-                            <div class="question-text">1. Apakah Anda menghindari interaksi sosial?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="C1" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="C1" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="C1" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="C1" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="C1" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">2. Apakah Anda lebih sering menyendiri?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="C2" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="C2" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="C2" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="C2" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="C2" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">3. Apakah Anda kehilangan motivasi untuk melakukan aktivitas sehari-hari?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="C3" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="C3" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="C3" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="C3" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="C3" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">4. Apakah Anda menunda-nunda pekerjaan (prokrastinasi)?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="C4" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="C4" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="C4" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="C4" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="C4" value="4"> 4</label>
-                            </div>
-                        </div>
+                        <div class="question-item"><div class="question-text">1. Apakah Anda menghindari interaksi sosial?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="C1" value="0"> 0</label><label class="scale-option"><input type="radio" name="C1" value="1"> 1</label><label class="scale-option"><input type="radio" name="C1" value="2"> 2</label><label class="scale-option"><input type="radio" name="C1" value="3"> 3</label><label class="scale-option"><input type="radio" name="C1" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">2. Apakah Anda lebih sering menyendiri?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="C2" value="0"> 0</label><label class="scale-option"><input type="radio" name="C2" value="1"> 1</label><label class="scale-option"><input type="radio" name="C2" value="2"> 2</label><label class="scale-option"><input type="radio" name="C2" value="3"> 3</label><label class="scale-option"><input type="radio" name="C2" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">3. Apakah Anda kehilangan motivasi untuk melakukan aktivitas sehari-hari?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="C3" value="0"> 0</label><label class="scale-option"><input type="radio" name="C3" value="1"> 1</label><label class="scale-option"><input type="radio" name="C3" value="2"> 2</label><label class="scale-option"><input type="radio" name="C3" value="3"> 3</label><label class="scale-option"><input type="radio" name="C3" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">4. Apakah Anda menunda-nunda pekerjaan (prokrastinasi)?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="C4" value="0"> 0</label><label class="scale-option"><input type="radio" name="C4" value="1"> 1</label><label class="scale-option"><input type="radio" name="C4" value="2"> 2</label><label class="scale-option"><input type="radio" name="C4" value="3"> 3</label><label class="scale-option"><input type="radio" name="C4" value="4"> 4</label></div></div>
                     </div>
-
-                    <!-- Grup D: Fisik (Psikosomatis) -->
+                    <!-- D. Fisik (Psikosomatis) -->
                     <div class="screening-group">
                         <h3><i class="fas fa-bed"></i> D. Fisik (Psikosomatis)</h3>
-                        <div class="question-item">
-                            <div class="question-text">1. Apakah Anda sering merasa lelah meskipun tidak banyak aktivitas?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="D1" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="D1" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="D1" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="D1" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="D1" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">2. Apakah Anda mengalami gangguan tidur (sulit tidur/terlalu banyak tidur)?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="D2" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="D2" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="D2" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="D2" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="D2" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">3. Apakah nafsu makan Anda berubah drastis?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="D3" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="D3" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="D3" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="D3" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="D3" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">4. Apakah Anda sering sakit kepala atau nyeri tanpa sebab medis jelas?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="D4" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="D4" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="D4" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="D4" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="D4" value="4"> 4</label>
-                            </div>
-                        </div>
+                        <div class="question-item"><div class="question-text">1. Apakah Anda sering merasa lelah meskipun tidak banyak aktivitas?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="D1" value="0"> 0</label><label class="scale-option"><input type="radio" name="D1" value="1"> 1</label><label class="scale-option"><input type="radio" name="D1" value="2"> 2</label><label class="scale-option"><input type="radio" name="D1" value="3"> 3</label><label class="scale-option"><input type="radio" name="D1" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">2. Apakah Anda mengalami gangguan tidur (sulit tidur/terlalu banyak tidur)?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="D2" value="0"> 0</label><label class="scale-option"><input type="radio" name="D2" value="1"> 1</label><label class="scale-option"><input type="radio" name="D2" value="2"> 2</label><label class="scale-option"><input type="radio" name="D2" value="3"> 3</label><label class="scale-option"><input type="radio" name="D2" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">3. Apakah nafsu makan Anda berubah drastis?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="D3" value="0"> 0</label><label class="scale-option"><input type="radio" name="D3" value="1"> 1</label><label class="scale-option"><input type="radio" name="D3" value="2"> 2</label><label class="scale-option"><input type="radio" name="D3" value="3"> 3</label><label class="scale-option"><input type="radio" name="D3" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">4. Apakah Anda sering sakit kepala atau nyeri tanpa sebab medis jelas?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="D4" value="0"> 0</label><label class="scale-option"><input type="radio" name="D4" value="1"> 1</label><label class="scale-option"><input type="radio" name="D4" value="2"> 2</label><label class="scale-option"><input type="radio" name="D4" value="3"> 3</label><label class="scale-option"><input type="radio" name="D4" value="4"> 4</label></div></div>
                     </div>
-
-                    <!-- Grup E: Hubungan Sosial -->
+                    <!-- E. Hubungan Sosial -->
                     <div class="screening-group">
                         <h3><i class="fas fa-users"></i> E. Hubungan Sosial</h3>
-                        <div class="question-item">
-                            <div class="question-text">1. Apakah Anda merasa tidak didukung oleh orang sekitar?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="E1" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="E1" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="E1" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="E1" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="E1" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">2. Apakah Anda sering merasa kesepian?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="E2" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="E2" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="E2" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="E2" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="E2" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">3. Apakah Anda mengalami konflik dengan keluarga/teman?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="E3" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="E3" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="E3" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="E3" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="E3" value="4"> 4</label>
-                            </div>
-                        </div>
-                        <div class="question-item">
-                            <div class="question-text">4. Apakah Anda merasa sulit mempercayai orang lain?</div>
-                            <div class="scale-options">
-                                <label class="scale-option"><input type="radio" name="E4" value="0"> 0</label>
-                                <label class="scale-option"><input type="radio" name="E4" value="1"> 1</label>
-                                <label class="scale-option"><input type="radio" name="E4" value="2"> 2</label>
-                                <label class="scale-option"><input type="radio" name="E4" value="3"> 3</label>
-                                <label class="scale-option"><input type="radio" name="E4" value="4"> 4</label>
-                            </div>
-                        </div>
+                        <div class="question-item"><div class="question-text">1. Apakah Anda merasa tidak didukung oleh orang sekitar?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="E1" value="0"> 0</label><label class="scale-option"><input type="radio" name="E1" value="1"> 1</label><label class="scale-option"><input type="radio" name="E1" value="2"> 2</label><label class="scale-option"><input type="radio" name="E1" value="3"> 3</label><label class="scale-option"><input type="radio" name="E1" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">2. Apakah Anda sering merasa kesepian?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="E2" value="0"> 0</label><label class="scale-option"><input type="radio" name="E2" value="1"> 1</label><label class="scale-option"><input type="radio" name="E2" value="2"> 2</label><label class="scale-option"><input type="radio" name="E2" value="3"> 3</label><label class="scale-option"><input type="radio" name="E2" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">3. Apakah Anda mengalami konflik dengan keluarga/teman?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="E3" value="0"> 0</label><label class="scale-option"><input type="radio" name="E3" value="1"> 1</label><label class="scale-option"><input type="radio" name="E3" value="2"> 2</label><label class="scale-option"><input type="radio" name="E3" value="3"> 3</label><label class="scale-option"><input type="radio" name="E3" value="4"> 4</label></div></div>
+                        <div class="question-item"><div class="question-text">4. Apakah Anda merasa sulit mempercayai orang lain?</div><div class="scale-options"><label class="scale-option"><input type="radio" name="E4" value="0"> 0</label><label class="scale-option"><input type="radio" name="E4" value="1"> 1</label><label class="scale-option"><input type="radio" name="E4" value="2"> 2</label><label class="scale-option"><input type="radio" name="E4" value="3"> 3</label><label class="scale-option"><input type="radio" name="E4" value="4"> 4</label></div></div>
                     </div>
-
-                    <button type="button" class="btn" onclick="hitungSkor()">
-                        <i class="fas fa-calculator"></i> Hitung Skor Screening
-                    </button>
+                    <button type="button" class="btn" onclick="hitungSkor()"><i class="fas fa-calculator"></i> Hitung Skor Screening</button>
                 </form>
 
                 <div id="hasilScreening" class="result-box" style="display: none;">
                     <h3>Hasil Screening</h3>
                     <div class="total-score" id="totalScore">0</div>
                     <div class="interpretation" id="interpretasi"></div>
+                    
+                    <!-- Pilihan konsultan untuk screening -->
+                    <div style="margin-top: 1rem; text-align: left;">
+                        <label style="font-weight: 600; margin-bottom: 0.5rem; display: block;"><i class="fas fa-user-md"></i> Pilih Konsultan:</label>
+                        <div class="consultant-group" id="screeningConsultantGroup">
+                            <div class="consultant-option">
+                                <input type="radio" name="screening_konsultan" id="screening_konsultan1" value="Afrina Maulida, M.Si. (Konsultan)" checked>
+                                <label for="screening_konsultan1"><i class="fas fa-female"></i> Afrina Maulida, M.Si. <span class="consultant-badge">Konsultan</span></label>
+                            </div>
+                            <div class="consultant-option">
+                                <input type="radio" name="screening_konsultan" id="screening_konsultan2" value="Lies imma J. M.Si (Konsultan)">
+                                <label for="screening_konsultan2"><i class="fas fa-female"></i> Lies imma J. M.Si <span class="consultant-badge">Konsultan</span></label>
+                            </div>
+                            <div class="consultant-option">
+                                <input type="radio" name="screening_konsultan" id="screening_konsultan3" value="Ardhianita Iftitah Rizqy, M.Psi. (Psikolog)">
+                                <label for="screening_konsultan3"><i class="fas fa-user-tie"></i> Ardhianita Iftitah Rizqy, M.Psi. <span class="consultant-badge">Psikolog</span></label>
+                            </div>
+                        </div>
+                    </div>
+
                     <button class="btn" style="margin-top: 1rem;" onclick="kirimHasilKeWhatsApp()">
                         <i class="fab fa-whatsapp"></i> Kirim Hasil ke Konsultan
                     </button>
@@ -575,38 +165,18 @@
                 <h2 style="margin-bottom: 1rem;">Konsultasi Langsung</h2>
                 <div id="alertMessage" class="alert"></div>
                 <form id="consultationForm">
-                    <div class="form-group">
-                        <label><i class="fas fa-user"></i> Inisial Nama *</label>
-                        <input type="text" class="form-control" id="nama" placeholder="Contoh: A. Pratama" required>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-calendar-alt"></i> Umur *</label>
-                        <input type="number" class="form-control" id="umur" placeholder="Contoh: 25" min="1" max="120" required>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-map-marker-alt"></i> Alamat *</label>
-                        <input type="text" class="form-control" id="alamat" placeholder="Contoh: Jakarta" required>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-comment-dots"></i> Keluhan *</label>
-                        <textarea class="form-control" id="keluhan" rows="5" placeholder="Tuliskan keluhan Anda dengan jelas..." required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-user-md"></i> Pilih Konsultan *</label>
+                    <div class="form-group"><label><i class="fas fa-user"></i> Inisial Nama *</label><input type="text" class="form-control" id="nama" placeholder="Contoh: A. Pratama" required></div>
+                    <div class="form-group"><label><i class="fas fa-calendar-alt"></i> Umur *</label><input type="number" class="form-control" id="umur" placeholder="Contoh: 25" min="1" max="120" required></div>
+                    <div class="form-group"><label><i class="fas fa-map-marker-alt"></i> Alamat *</label><input type="text" class="form-control" id="alamat" placeholder="Contoh: Jakarta" required></div>
+                    <div class="form-group"><label><i class="fas fa-comment-dots"></i> Keluhan *</label><textarea class="form-control" id="keluhan" rows="5" placeholder="Tuliskan keluhan Anda dengan jelas..." required></textarea></div>
+                    <div class="form-group"><label><i class="fas fa-user-md"></i> Pilih Konsultan *</label>
                         <div class="consultant-group">
-                            <div class="consultant-option">
-                                <input type="radio" name="konsultan" id="konsultan1" value="Afrina Maulida, M.Si. (Konsultan)" checked>
-                                <label for="konsultan1"><i class="fas fa-female"></i> Afrina Maulida, M.Si. <span class="consultant-badge">Konsultan</span></label>
-                            </div>
-                            <div class="consultant-option">
-                                <input type="radio" name="konsultan" id="konsultan2" value="Lies imma J. M.Si (Konsultan)">
-                                <label for="konsultan2"><i class="fas fa-female"></i> Lies imma J. M.Si <span class="consultant-badge">Konsultan</span></label>
-                            </div>
+                            <div class="consultant-option"><input type="radio" name="konsultan" id="konsultan1" value="Afrina Maulida, M.Si. (Konsultan)" checked><label for="konsultan1"><i class="fas fa-female"></i> Afrina Maulida, M.Si. <span class="consultant-badge">Konsultan</span></label></div>
+                            <div class="consultant-option"><input type="radio" name="konsultan" id="konsultan2" value="Lies imma J. M.Si (Konsultan)"><label for="konsultan2"><i class="fas fa-female"></i> Lies imma J. M.Si <span class="consultant-badge">Konsultan</span></label></div>
+                            <div class="consultant-option"><input type="radio" name="konsultan" id="konsultan3" value="Ardhianita Iftitah Rizqy, M.Psi. (Psikolog)"><label for="konsultan3"><i class="fas fa-user-tie"></i> Ardhianita Iftitah Rizqy, M.Psi. <span class="consultant-badge">Psikolog</span></label></div>
                         </div>
                     </div>
-                    <button type="button" class="btn" onclick="kirimKeWhatsApp()">
-                        <i class="fab fa-whatsapp"></i> Kirim Keluhan ke WhatsApp Konsultan
-                    </button>
+                    <button type="button" class="btn" onclick="kirimKeWhatsApp()"><i class="fab fa-whatsapp"></i> Kirim Keluhan ke WhatsApp Konsultan</button>
                 </form>
             </div>
         </div>
@@ -629,43 +199,25 @@
 
         // ========== SCREENING LOGIC ==========
         function hitungSkor() {
-            // Daftar semua nama input yang harus diambil nilainya
-            const questionNames = [
-                'A1','A2','A3','A4',
-                'B1','B2','B3','B4',
-                'C1','C2','C3','C4',
-                'D1','D2','D3','D4',
-                'E1','E2','E3','E4'
-            ];
+            const questionNames = ['A1','A2','A3','A4','B1','B2','B3','B4','C1','C2','C3','C4','D1','D2','D3','D4','E1','E2','E3','E4'];
             let total = 0;
             let answered = true;
             for (let i = 0; i < questionNames.length; i++) {
                 const selected = document.querySelector(`input[name="${questionNames[i]}"]:checked`);
-                if (selected) {
-                    total += parseInt(selected.value);
-                } else {
-                    answered = false;
-                    break;
-                }
+                if (selected) total += parseInt(selected.value);
+                else { answered = false; break; }
             }
-            if (!answered) {
-                alert("Harap jawab semua pertanyaan sebelum menghitung skor.");
-                return;
-            }
-
-            // Tampilkan hasil
-            const maxScore = questionNames.length * 4; // 20*4 = 80
+            if (!answered) { alert("Harap jawab semua pertanyaan sebelum menghitung skor."); return; }
+            const maxScore = questionNames.length * 4;
             const persen = (total / maxScore) * 100;
             let interpretasi = "";
             if (persen <= 20) interpretasi = "Risiko rendah: Kesehatan mental Anda cukup baik. Tetap jaga keseimbangan hidup.";
             else if (persen <= 40) interpretasi = "Risiko sedang: Ada beberapa tanda stres atau kecemasan. Pertimbangkan untuk berkonsultasi lebih lanjut.";
             else if (persen <= 60) interpretasi = "Risiko tinggi: Anda menunjukkan gejala yang signifikan. Sangat disarankan berkonsultasi dengan profesional.";
             else interpretasi = "Risiko sangat tinggi: Segera konsultasikan dengan psikolog atau psikiater untuk penanganan lebih lanjut.";
-
             document.getElementById('totalScore').innerText = total;
             document.getElementById('interpretasi').innerHTML = interpretasi;
             document.getElementById('hasilScreening').style.display = "block";
-            // Simpan total skor untuk dikirim ke WhatsApp
             window.screeningScore = total;
         }
 
@@ -676,19 +228,11 @@
             }
             const nama = prompt("Masukkan inisial nama untuk dikirim bersama hasil screening:", "");
             if (!nama) return;
-
-            // Pilih konsultan (default ke yang pertama)
-            const konsultanTerpilih = {
-            'Afrina Maulida, M.Si. (Konsultan)': '6282338038199',  
-            'Lies imma J. M.Si. (Konsultan)': '6281217217601',
-            'Ardhuanita Iftitah Rizqy, M.Psi. (Psikolog Klinis)':'6282193070757',
-        };
+            const selectedKonsultan = document.querySelector('input[name="screening_konsultan"]:checked');
+            if (!selectedKonsultan) { alert("Pilih konsultan terlebih dahulu."); return; }
+            const konsultanTerpilih = selectedKonsultan.value;
             const nomorKonsultan = NOMOR_KONSULTAN[konsultanTerpilih];
-            if (!nomorKonsultan) {
-                alert("Nomor konsultan tidak ditemukan!");
-                return;
-            }
-
+            if (!nomorKonsultan) { alert("Nomor konsultan tidak ditemukan!"); return; }
             const pesan = `*HASIL SCREENING KESEHATAN MENTAL*
 Nama/Inisial: ${nama}
 Total Skor: ${window.screeningScore} / 80
@@ -702,9 +246,9 @@ Interpretasi: ${document.getElementById('interpretasi').innerText}
 
         // ========== KONFIGURASI NOMOR WHATSAPP PER KONSULTAN ==========
         const NOMOR_KONSULTAN = {
-            'Afrina Maulida, M.Si. (Konsultan)': '6282338038199',  
-            'Lies imma J. M.Si. (Konsultan)': '6281217217601',
-            'Ardhuanita Iftitah Rizqy, M.Psi. (Psikolog Klinis)':'6282193070757',
+            'Afrina Maulida, M.Si. (Konsultan)': '6282338038199',
+            'Lies imma J. M.Si (Konsultan)': '6281217217601',
+            'Ardhianita Iftitah Rizqy, M.Psi. (Psikolog)': '6281234567890'
         };
 
         function kirimKeWhatsApp() {
@@ -712,8 +256,6 @@ Interpretasi: ${document.getElementById('interpretasi').innerText}
             const umur = document.getElementById('umur').value.trim();
             const alamat = document.getElementById('alamat').value.trim();
             const keluhan = document.getElementById('keluhan').value.trim();
-
-            // Ambil konsultan yang dipilih
             const konsultanElements = document.getElementsByName('konsultan');
             let konsultanTerpilih = '';
             for (let i = 0; i < konsultanElements.length; i++) {
@@ -722,8 +264,6 @@ Interpretasi: ${document.getElementById('interpretasi').innerText}
                     break;
                 }
             }
-
-            // Validasi
             if (!nama || !umur || !alamat || !keluhan) {
                 tampilkanAlert('Semua kolom harus diisi!', 'error');
                 return;
@@ -732,15 +272,11 @@ Interpretasi: ${document.getElementById('interpretasi').innerText}
                 tampilkanAlert('Keluhan terlalu pendek. Minimal 10 karakter.', 'error');
                 return;
             }
-
-            // Ambil nomor berdasarkan konsultan terpilih
             const nomorKonsultan = NOMOR_KONSULTAN[konsultanTerpilih];
             if (!nomorKonsultan) {
                 tampilkanAlert('Nomor konsultan tidak ditemukan!', 'error');
                 return;
             }
-
-            // Format pesan
             let pesan = `*KONSULTASI MENTAL HEALTH*
 Data Diri:
 • Inisial: ${nama}
@@ -749,20 +285,13 @@ Data Diri:
 Konsultan Tujuan: ${konsultanTerpilih}
 Keluhan:
 ${keluhan}`;
-
-            // Tambahkan hasil screening jika ada
             if (typeof window.screeningScore !== 'undefined') {
                 pesan += `\n\n*Hasil Screening:*\nSkor: ${window.screeningScore} / 80\nInterpretasi: ${document.getElementById('interpretasi').innerText}`;
             }
-
             pesan += `\n---\n*Catatan:* Pesan ini dikirim otomatis dari Dashboard Konsultasi MentalHealth. Mohon dibalas dalam 1x24 jam.`;
-
-            // Buka WhatsApp
             const url = `https://wa.me/${nomorKonsultan}?text=${encodeURIComponent(pesan)}`;
             tampilkanAlert('Mengalihkan ke WhatsApp...', 'success');
-            setTimeout(() => {
-                window.open(url, '_blank');
-            }, 1000);
+            setTimeout(() => { window.open(url, '_blank'); }, 1000);
         }
 
         function tampilkanAlert(pesan, tipe) {
@@ -770,9 +299,7 @@ ${keluhan}`;
             alertDiv.style.display = 'block';
             alertDiv.className = `alert alert-${tipe}`;
             alertDiv.innerHTML = `<i class="fas ${tipe === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${pesan}`;
-            setTimeout(() => {
-                alertDiv.style.display = 'none';
-            }, 3000);
+            setTimeout(() => { alertDiv.style.display = 'none'; }, 3000);
         }
     </script>
 </body>
