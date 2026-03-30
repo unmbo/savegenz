@@ -678,7 +678,11 @@
             if (!nama) return;
 
             // Pilih konsultan (default ke yang pertama)
-            const konsultanTerpilih = "Afrina Maulida, M.Si. (Konsultan)";
+            const konsultanTerpilih = {
+            'Afrina Maulida, M.Si. (Konsultan)': '6282338038199',  
+            'Lies imma J. M.Si. (Konsultan)': '6281217217601',
+            'Ardhuanita Iftitah Rizqy, M.Psi. (Psikolog Klinis)':'6282193070757',
+        };
             const nomorKonsultan = NOMOR_KONSULTAN[konsultanTerpilih];
             if (!nomorKonsultan) {
                 alert("Nomor konsultan tidak ditemukan!");
@@ -699,8 +703,8 @@ Interpretasi: ${document.getElementById('interpretasi').innerText}
         // ========== KONFIGURASI NOMOR WHATSAPP PER KONSULTAN ==========
         const NOMOR_KONSULTAN = {
             'Afrina Maulida, M.Si. (Konsultan)': '6282338038199',  
-            'Lies imma J. M.Si (Konsultan)': '6281217217601',
-           
+            'Lies imma J. M.Si. (Konsultan)': '6281217217601',
+            'Ardhuanita Iftitah Rizqy, M.Psi. (Psikolog Klinis)':'6282193070757',
         };
 
         function kirimKeWhatsApp() {
